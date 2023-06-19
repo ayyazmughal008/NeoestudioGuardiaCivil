@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1058215598914",
+    "project_id": "neoestudio-7af6a",
+    "storage_bucket": "neoestudio-7af6a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1058215598914:android:813e765223771c9b63c6db",
+        "android_client_info": {
+          "package_name": "com.neostudio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1058215598914-r1906a5f481ufb8nvfvtjro7u6daadmm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaVrvvQoj1ofbYetFcb0uX1144B0G-12I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1058215598914-r1906a5f481ufb8nvfvtjro7u6daadmm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

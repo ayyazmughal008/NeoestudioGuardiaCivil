@@ -1,0 +1,7 @@
+export const background = require('./back3.png')
+export const logo = require('../../Login/assets/logo.png')
+export const cono = require('./cono.png')
+export const ingless = require('./Ingless.png')
+export const ortografia = require('./ortografia.png')
+export const psicotecnicos = require('./Psicotecnicos.png')
+export const btn_background = require('../../Login/assets/button.png')
