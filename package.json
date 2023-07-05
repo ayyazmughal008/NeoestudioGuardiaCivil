@@ -1,10 +1,10 @@
 {
   "name": "ToDoApp",
-  "version": "1.1.17",
-  "iosVerion": "1.1.1",
+  "version": "1.1.19",
+  "iosVerion": "1.1.3",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
+    "android": "source ~/.bash_profile&&react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",

@@ -6,10 +6,16 @@ import OTP from '../../screens/Login/OTP'
 export default createStackNavigator(
   {
     Login: {
-      screen: Login
+      screen: Login,
+      navigationOptions: {
+        gestureEnabled: false,
+      },
     },
     OTP: {
-      screen: OTP
+      screen: OTP,
+      navigationOptions: {
+        gestureEnabled: false,
+      },
     },
   },
   {

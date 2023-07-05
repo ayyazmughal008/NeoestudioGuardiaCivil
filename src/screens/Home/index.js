@@ -810,7 +810,7 @@ class Home extends Component {
                     )}
                     <Text style={styles.versionText}>
                       {'versión: '}
-                      {version}
+                      {Platform.OS === 'android' ? version: iosVerion}
                     </Text>
                     {/* <View style={styles.jump} /> */}
                   </ScrollView>
