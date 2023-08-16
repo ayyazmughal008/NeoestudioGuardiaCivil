@@ -98,7 +98,7 @@ const Programs = props => {
       />
       <Header
         iconName="left"
-        leftClick={() => props.navigation.goBack()}
+        leftClick={() => props.navigation.navigate('HomeScreen')}
         title="Actividades"
       />
       {pageSelected !== 0 && (

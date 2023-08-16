@@ -28,7 +28,6 @@ class ModalBox extends React.Component {
           style={styles.modalMain}
           activeOpacity={1}
           onPressOut={closeBox}>
-          <TouchableWithoutFeedback>
             <FastImage
               source={require('../../screens/Home/assets/email_box.png')}
               resizeMode={FastImage.resizeMode.stretch}
@@ -37,7 +36,7 @@ class ModalBox extends React.Component {
                 {
                   height: DeviceInfo.isTablet()
                     ? widthPercentageToDP(35)
-                    : widthPercentageToDP(33),
+                    : widthPercentageToDP(45),
                 },
               ]}>
               <Text style={styles.text1}>
@@ -60,7 +59,6 @@ class ModalBox extends React.Component {
                 </TouchableOpacity>
               </View>
             </FastImage>
-          </TouchableWithoutFeedback>
         </TouchableOpacity>
       </Modal>
     );

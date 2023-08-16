@@ -12,6 +12,8 @@ import {
   TouchableWithoutFeedback,
   Alert,
   Linking,
+  PermissionsAndroid,
+  Platform
 } from 'react-native';
 import {Input} from 'react-native-elements';
 import {NavigationEvents} from 'react-navigation';
@@ -62,6 +64,7 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
+    this.handleNotificationPermission()
     //RNRestart.Restart();
     this.focusListener = this.props.navigation.addListener('didFocus', () => {
       const locked = Orientation.isLocked();
@@ -192,6 +195,28 @@ class Login extends React.Component {
     const result = await getReasons();
     await this.setState({reasons: result});
     await this.setState({isLoading: false});
+  };
+  handleNotificationPermission = async () => {
+    if (Platform.OS === 'android') {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+          {
+            title: 'PUSH NOTIFICATIONS PERMISSION',
+            message: 'Neoestudio want to send you PUSH NOTIFICATIONS',
+
+            buttonNegative: 'Cancel',
+            buttonPositive: 'Ok',
+          },
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          console.log('GRANTED');
+        } else {
+        }
+      } catch (err) {
+        console.warn(err);
+      }
+    }
   };
 
   render() {

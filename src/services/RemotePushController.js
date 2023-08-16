@@ -3,24 +3,23 @@ import PushNotification from 'react-native-push-notification';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import messaging from '@react-native-firebase/messaging';
 import NavigationService from '../navigator/navigationService';
-import {useSelector, useDispatch} from 'react-redux';
-import {saveUserToken} from '../Redux/action';
-const RemotePushController = props => {
-  const dispatch = useDispatch();
-  const [token, saveToken] = useState('');
-  const login = useSelector(state => state.user.login);
+import {saveToken} from '../Redux/action';
+import {Store} from '../Redux/store'
 
-  // useEffect(() => {
-  //     if (login) {
-  //         dispatch(saveUserToken(login.data.id, token))
-  //     }
-  // }, [login,token])
+const RemotePushController = props => {
+  const [token, saveMyToken] = useState('');
+
+  useEffect(()=>{
+    if (token) {
+      Store.dispatch(saveToken(token))
+    }
+  },[token])
 
   useEffect(() => {
     PushNotification.configure({
       // (optional) Called when Token is generated (iOS and Android)
       onRegister: function (value) {
-        saveToken(value.token);
+        saveMyToken(value.token);
         console.log('TOKEN:', value);
       },
       // (required) Called when a remote or local notification is opened or received
@@ -29,29 +28,6 @@ const RemotePushController = props => {
         // let naviType = "";
         // naviType = notification.data.type;
         // console.log(naviType)
-        // process the notification here
-        // if (notification.userInteraction) {
-        //     if (naviType == "holiday") {
-        //         NavigationService.navigate("Vocation")
-        //     }
-        //     else if (naviType == "part") {
-        //         NavigationService.navigate("ParteDiario")
-        //     }
-        //     else if (naviType == "expense") {
-        //         NavigationService.navigate("MisGastos")
-        //     }
-        //     else if (naviType == "blog") {
-        //         NavigationService.navigate("Blog")
-        //     }
-        //     else if (naviType == "document") {
-        //         NavigationService.navigate("Documents")
-        //     }
-        //     else if (naviType == "epi") {
-        //         NavigationService.navigate("Epis")
-        //     } else {
-        //         alert("No data")
-        //     }
-        // }
       },
       // (optional) Called when Registered Action is pressed and invokeApp is false, if true onNotification will be called (Android)
       onAction: function (notification) {
@@ -93,13 +69,16 @@ const RemotePushController = props => {
       created => console.log(`createChannel returned '${created}'`), // (optional) callback returns whether the channel was created, false means it already existed.
     );
     const unsubscribe = messaging().onMessage(async remoteMessage => {
+      console.log(remoteMessage);
       PushNotification.localNotification({
         channelId: 'neoestudio-id',
         message: remoteMessage.notification.body,
         title: remoteMessage.notification.title,
-        bigPictureUrl: remoteMessage.notification.android.imageUrl,
-        smallIcon: remoteMessage.notification.android.imageUrl,
-        color: 'red', // (optional) default: system default
+        // message: remoteMessage.data.body,
+        // title: remoteMessage.data.title,
+        bigPictureUrl: remoteMessage?.data?.image,
+        bigLargeIconUrl: remoteMessage?.data?.icon,
+        color: 'grey', // (optional) default: system default
         vibrate: true, // (optional) default: true,
         playSound: true, // (optional) default: true
         soundName: 'default', // (optional) See `soundName` parameter of `localNotification` function

@@ -32,7 +32,7 @@ class MainApp extends React.Component {
       console.log('Authorization status:', authStatus);
     }
     messaging().onMessage(async remoteMessage => {
-      console.log('===>', remoteMessage.data);
+      console.log('===>', remoteMessage);
       // if (remoteMessage.data.type == "holiday") {
       //   navigationService.navigate("Vocation")
       // }
@@ -41,7 +41,7 @@ class MainApp extends React.Component {
       // }
     });
     messaging().setBackgroundMessageHandler(async remoteMessage => {
-      console.log('Message handled in the background!', remoteMessage.data);
+      console.log('Message handled in the background!', remoteMessage);
       // if (remoteMessage.data.type == "holiday") {
       //   navigationService.navigate("Vocation")
       // }
@@ -52,7 +52,7 @@ class MainApp extends React.Component {
     messaging().onNotificationOpenedApp(remoteMessage => {
       console.log(
         'Notification caused app to open from background state:',
-        remoteMessage.data,
+        remoteMessage,
       );
       // if (remoteMessage.data.type == "holiday") {
       //   navigationService.navigate("Vocation")
@@ -69,7 +69,7 @@ class MainApp extends React.Component {
         if (remoteMessage) {
           console.log(
             'Notification caused app to open from quit state:',
-            remoteMessage.data,
+            remoteMessage,
           );
           // if (remoteMessage.data.type == "holiday") {
           //   navigationService.navigate("Vocation")

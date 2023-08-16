@@ -132,7 +132,8 @@ var login = 'loginStudent',
   questionqueries = 'questionqueries',
   blocked = 'blocked',
   success = 'success',
-  reviewExam = 'reviewExam';
+  reviewExam = 'reviewExam',
+  deleteuser = 'deleteuser';
 // ====================//
 
 export const saveActivityId = (value, name) => {
@@ -3315,74 +3316,112 @@ export const updateRejectReason = async (
   return api;
 };
 
-export const checkPackageExpired = async (receipt, password, isEclude, isTest, userId) => {
-  console.log(userId)
-  let api
+export const checkPackageExpired = async (
+  receipt,
+  password,
+  isEclude,
+  isTest,
+  userId,
+) => {
+  console.log(userId);
+  let api;
   try {
     api = await fetch(baseUrl + blocked, {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
-        "Content-type": "application/json",
+        Accept: 'application/json',
+        'Content-type': 'application/json',
       },
       body: JSON.stringify({
-        "receipt-data": receipt,
-        "password": password,
-        "exclude-old-transactions": isEclude,
-        "userId": userId,
-        "isTest": isTest
-      })
+        'receipt-data': receipt,
+        password: password,
+        'exclude-old-transactions': isEclude,
+        userId: userId,
+        isTest: isTest,
+      }),
     })
       .then(res => res.json())
       .then(json => {
-        console.log('===>', json)
+        console.log('===>', json);
         if (json.status === 'Successfull') {
           if (json.is_block) {
-            Alert.alert("", json.message)
+            Alert.alert('', json.message);
           }
         }
       })
       .catch(error => {
-        console.log("response error ===>", error)
-      })
+        console.log('response error ===>', error);
+      });
   } catch (error) {
     console.log('my error' + error.message);
   }
-  return api
+  return api;
+};
 
-}
-
-export const updateSubscription = async (userId, amount, package_tenure, package_id, paymnet) => {
-  console.log('data ==>', userId, amount, package_tenure, package_id, paymnet)
-  let api
+export const updateSubscription = async (
+  userId,
+  amount,
+  package_tenure,
+  package_id,
+  paymnet,
+) => {
+  console.log('data ==>', userId, amount, package_tenure, package_id, paymnet);
+  let api;
   try {
     api = await fetch(baseUrl + success, {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
-        "Content-type": "application/json",
+        Accept: 'application/json',
+        'Content-type': 'application/json',
       },
       body: JSON.stringify({
         userId: userId,
         amount: amount,
         package_tenure: package_tenure,
         package_id: package_id,
-        payment: paymnet
-      })
+        payment: paymnet,
+      }),
     })
       .then(res => res.json())
       .then(json => {
-        console.log(json)
+        console.log(json);
         if (json.status === 'Successfull') {
-          NavigationService.navigate('HomeScreen')
+          NavigationService.navigate('HomeScreen');
         }
       })
       .catch(error => {
-        console.log("response error ===>", error)
-      })
+        console.log('response error ===>', error);
+      });
   } catch (error) {
     console.log('my error' + error.message);
   }
-  return api
+  return api;
+};
 
-}
+export const deleteMyUser = async userId => {
+  console.log('data ==>', userId);
+  let api;
+  try {
+    api = await fetch(baseUrl + deleteuser, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        studentId: userId,
+      }),
+    })
+      .then(res => res.json())
+      .then(json => {
+        console.log(json);
+        return json;
+      })
+      .catch(error => {
+        console.log('response error ===>', error);
+      });
+  } catch (error) {
+    console.log('my error' + error.message);
+  }
+  return api;
+};

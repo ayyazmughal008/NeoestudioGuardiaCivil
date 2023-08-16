@@ -128,11 +128,11 @@ class Home extends Component {
     this.setState({
       isOpen: login.data.emailSubscription === null ? true : false,
     });
-    if(Platform.OS === 'android'){
+    if (Platform.OS === 'android') {
       if (login.data.androidVersion !== version) {
         this.setState({verSionPopUp: true});
       }
-    }else {
+    } else {
       if (login.data.iosVersion !== iosVerion) {
         this.setState({verSionPopUp: true});
       }
@@ -278,23 +278,28 @@ class Home extends Component {
           : (this.test(), this.props.navigation.navigate('Activity'));
       case 2:
         return AuthLoading ? false : (this.test(), this.fetchVideoData());
-      //this.props.navigation.navigate('TikTok')
       case 3:
+        return AuthLoading
+          ? false
+          : Linking.openURL(
+              'https://webversion.neoestudio.net/directo?id=' + login?.data?.id,
+            );
+      case 4:
         //return this.handleClick();
         return AuthLoading
           ? false
           : //: crashlytics().crash();
             (this.test(), this.props.navigation.navigate('Objectives'));
-      case 4:
+      case 5:
         return AuthLoading
           ? false
           : //: this.props.navigation.navigate('Calender')
             (this.test(), this.props.navigation.navigate('News'));
-      case 5:
+      case 6:
         return AuthLoading
           ? false
           : (this.test(), this.props.navigation.navigate('Calender'));
-      case 6:
+      case 7:
         return (
           AuthLoading
             ? false
@@ -305,7 +310,7 @@ class Home extends Component {
             isRefresh: 'false',
           })
         );
-      case 7:
+      case 8:
         return AuthLoading
           ? false
           : !login.package
@@ -314,7 +319,7 @@ class Home extends Component {
           ? this.setState({popUp: true})
           : //this.props.navigation.navigate('PDF')
             (this.test(), this.props.navigation.navigate('PDF'));
-      case 8:
+      case 9:
         return AuthLoading
           ? false
           : !login.package
@@ -322,8 +327,7 @@ class Home extends Component {
           : login.data.type === 'Alumno' && login.package.course === 'Silver'
           ? this.setState({popUp: true})
           : (this.test(), this.props.navigation.navigate('AudioClass'));
-
-      case 9:
+      case 10:
         return AuthLoading
           ? false
           : !login.package
@@ -331,7 +335,7 @@ class Home extends Component {
           : login.data.type === 'Alumno' && login.package.course === 'Silver'
           ? this.setState({popUp: true})
           : (this.test(), this.props.navigation.navigate('VideoClass'));
-      case 10:
+      case 11:
         return AuthLoading
           ? false
           : !login.package
@@ -339,14 +343,14 @@ class Home extends Component {
           : login.data.type === 'Alumno' && login.package.course === 'Gold'
           ? this.setState({popUp: true})
           : (this.test(), this.props.navigation.navigate('Clases'));
-      case 11:
-        return AuthLoading ? false : null;
       case 12:
+        return AuthLoading ? false : null;
+      case 13:
         return AuthLoading
           ? false
           : //: null
             (this.test(), this.props.navigation.navigate('ActiveBattle'));
-      case 13:
+      case 14:
         return AuthLoading
           ? false
           : !login.package
@@ -354,21 +358,21 @@ class Home extends Component {
           : login.data.type === 'Alumno' && login.package.course === 'Silver'
           ? this.setState({popUp: true})
           : (this.test(), this.props.navigation.navigate('FAQ'));
-      case 14:
+      case 15:
         return AuthLoading
           ? false
           : (this.test(), this.props.navigation.navigate('GlobalRanking'));
-      case 15:
+      case 16:
         return (
           AuthLoading ? false : this.test(),
           updateUserRankPoint('Yes', 'No', 'normal_points', login.data.id),
           this.props.navigation.navigate('ReviewTest')
         );
-      case 16:
+      case 17:
         return AuthLoading
           ? false
           : (this.test(), this.props.navigation.navigate('Personality'));
-      case 17:
+      case 18:
         return AuthLoading
           ? false
           : !login.package
@@ -376,23 +380,27 @@ class Home extends Component {
           : login.data.type === 'Alumno' && login.package.course === 'Gold'
           ? this.setState({popUp: true})
           : (this.test(), this.props.getAllChats(true, login.data.id));
-      case 18:
-        return AuthLoading
-          ? false
-          : (this.test(), this.props.navigation.navigate('DownUpload'));
       case 19:
         return AuthLoading
           ? false
-          : (this.test(), this.props.navigation.navigate('Survey'));
+          : (this.test(), this.props.navigation.navigate('DownUpload'));
       case 20:
-        return AuthLoading ? false : null;
+        return AuthLoading
+          ? false
+          : (this.test(), this.props.navigation.navigate('Survey'));
       case 21:
+        return AuthLoading ? false : null;
+      case 22:
         return AuthLoading
           ? false
           : Platform.OS === 'android'
           ? this.openLink()
           : this.props.navigation.navigate('Payment');
-      case 22:
+      case 23:
+        return AuthLoading
+        ? false
+        : (this.test(), this.props.navigation.navigate('Settings'));
+      case 23:
         return AuthLoading ? false : (this.test(), this.logoutApi());
     }
   };
@@ -810,7 +818,7 @@ class Home extends Component {
                     )}
                     <Text style={styles.versionText}>
                       {'versión: '}
-                      {Platform.OS === 'android' ? version: iosVerion}
+                      {Platform.OS === 'android' ? version : iosVerion}
                     </Text>
                     {/* <View style={styles.jump} /> */}
                   </ScrollView>

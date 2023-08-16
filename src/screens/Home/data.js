@@ -29,6 +29,15 @@ export const data = [
     // new icon added
     {
         id: 4,
+        text: "Directo",
+        status: false,
+        isChat: false,
+        newItems: false,
+        isShow:true,
+        image: require('../../Images/directo.png')
+    },
+    {
+        id: 5,
         text: "Objetivos",
         status: false,
         isChat: false,
@@ -37,7 +46,7 @@ export const data = [
         image: require('./assets/Objetivos.png')
     },
     {
-        id: 5,
+        id: 6,
         text: "Novedades",
         status: true,
         isChat: false,
@@ -46,7 +55,7 @@ export const data = [
         image: require('./assets/novedades.png')
     },
     {
-        id: 6,
+        id: 7,
         text: "Calendario",
         status: false,
         isChat: false,
@@ -55,7 +64,7 @@ export const data = [
         image: require('../../Images/calendar.png')
     },
     {
-        id: 7,
+        id: 8,
         text: "Exámenes",
         status: false,
         isChat: false,
@@ -64,7 +73,7 @@ export const data = [
         image: require('./assets/examen.png')
     },
     {
-        id: 8,
+        id: 9,
         text: "Temario",
         status: false,
         isChat: false,
@@ -73,7 +82,7 @@ export const data = [
         image: require('./assets/Temario.png')
     },
     {
-        id: 9,
+        id: 10,
         text: "Audiolibro",
         status: false,
         isChat: false,
@@ -82,7 +91,7 @@ export const data = [
         image: require('./assets/audiolibro.png')
     },
     {
-        id: 10,
+        id: 11,
         text: "Vídeos",
         status: false,
         isChat: false,
@@ -92,7 +101,7 @@ export const data = [
     },
     // new iconsadded
     {
-        id: 11,
+        id: 12,
         text: "Clases",
         status: false,
         isChat: false,
@@ -101,7 +110,7 @@ export const data = [
         image: require('./assets/clases.png')
     },
     {
-        id: 12,
+        id: 13,
         text: "Memorización",
         status: false,
         isChat: false,
@@ -110,7 +119,7 @@ export const data = [
         image: require('./assets/Memorizacion.png')
     },
     {
-        id: 13,
+        id: 14,
         text: "Batalla",
         status: false,
         isChat: false,
@@ -120,7 +129,7 @@ export const data = [
     },
     // end here
     {
-        id: 14,
+        id: 15,
         text: "Preguntas",
         status: false,
         isChat: false,
@@ -129,7 +138,7 @@ export const data = [
         image: require('./assets/preguntas_frecuentes.png')
     },
     {
-        id: 15,
+        id: 16,
         text: "Ranking global",
         status: false,
         isChat: false,
@@ -138,7 +147,7 @@ export const data = [
         image: require('./assets/ranking.png')
     },
     {
-        id: 16,
+        id: 17,
         text: "Repaso",
         status: false,
         isChat: false,
@@ -147,7 +156,7 @@ export const data = [
         image: require('./assets/repaso.png')
     },
     {
-        id: 17,
+        id: 18,
         text: "Entrevista",
         status: false,
         isChat: false,
@@ -156,7 +165,7 @@ export const data = [
         image: require('./assets/entrevista_personal.png')
     },
     {
-        id: 18,
+        id: 19,
         text: "Profesorado",
         status: false,
         isChat: true,
@@ -165,7 +174,7 @@ export const data = [
         image: require('./assets/profesorado.png')
     },
     {
-        id: 19,
+        id: 20,
         text: "Descargas",
         status: false,
         isChat: false,
@@ -174,7 +183,7 @@ export const data = [
         image: require('./assets/descargas.png')
     },
     {
-        id: 20,
+        id: 21,
         text: "Encuestas",
         status: false,
         isChat: false,
@@ -183,7 +192,7 @@ export const data = [
         image: require('./assets/encuestas.png')
     },
     {
-        id: 21,
+        id: 22,
         text: "Pruebas físicas",
         status: false,
         isChat: false,
@@ -192,7 +201,7 @@ export const data = [
         image: require('./assets/pruebas_fisicas.png')
     },
     {
-        id: 22,
+        id: 23,
         text: "¡Pídelo ya!",
         status: false,
         isChat: false,
@@ -202,6 +211,15 @@ export const data = [
     },
     {
         id: 23,
+        text: "Ajustes",
+        status: false,
+        isChat: false,
+        newItems: false,
+        isShow:true,
+        image: require('../../Images/setting.png')
+    },
+    {
+        id: 24,
         text: "Salir",
         status: false,
         isChat: false,

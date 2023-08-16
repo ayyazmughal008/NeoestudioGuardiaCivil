@@ -13,7 +13,7 @@ const persistConfig = {
   blacklist: ['dialog']
 };
 const persistedReducer = persistReducer(persistConfig, reducer);
-const Store = createStore(persistedReducer, applyMiddleware(thunk));
-const persistor = persistStore(Store);
+export const Store = createStore(persistedReducer, applyMiddleware(thunk));
+export const persistor = persistStore(Store);
 
-module.exports = { Store, persistor };
+//module.exports = { Store, persistor };

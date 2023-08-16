@@ -46,6 +46,7 @@ import Activity from '../../screens/Actividad/Activity';
 import BattleTest from '../../screens/BattleTest';
 import AudioActivity from '../../screens/Actividad/AudioActivity';
 import TestScreen from '../../screens/TestScreen';
+import Settings from '../../screens/Settings';
 
 export default createStackNavigator(
   {
@@ -327,6 +328,12 @@ export default createStackNavigator(
     },
     TestScreen: {
       screen: TestScreen,
+      navigationOptions: {
+        gestureEnabled: false,
+      },
+    },
+    Settings: {
+      screen: Settings,
       navigationOptions: {
         gestureEnabled: false,
       },

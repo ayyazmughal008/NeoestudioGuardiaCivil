@@ -45,7 +45,7 @@ const Activity = (props) => {
                     fontFamily: props.studentExamStatus === 'end' ?
                         fonts.elegance
                         : props.isCompleted === 'no' ?
-                            fonts.novaBold : fonts.elegance,
+                            fonts.novaBold : fonts.novaRegular,
                 }]}>
                     {(props.type === 'exam' || props.type === 'review' || props.type === 'personality') ?
                         props.activityName !== "" ? props.activityName
@@ -54,7 +54,7 @@ const Activity = (props) => {
                     }
                 </Text>
                 : <Text style={[styles.title, {
-                    fontFamily: props.isCompleted === 'no' ? fonts.novaBold : fonts.elegance,
+                    fontFamily: props.isCompleted === 'no' ? fonts.novaBold : fonts.novaRegular,
                 }]}>
                     {/* {!props.activityName ? props.name
                         : !props.name ? props.title : props.activityName} */}
