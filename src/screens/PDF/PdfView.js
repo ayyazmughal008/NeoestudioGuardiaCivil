@@ -7,6 +7,7 @@ import {
   BackHandler,
   AppState,
 } from 'react-native';
+import Header from '../../Component/Header';
 import PDF from 'react-native-pdf';
 import {connect} from 'react-redux';
 import {pdfState} from '../../Redux/action';
@@ -65,6 +66,12 @@ class PdfView extends React.Component {
     const {AuthLoading, login} = this.props.user;
     return (
       <View style={{flex: 1, alignItems: 'center'}}>
+        <Header
+          isPdf={true}
+          iconName="left"
+          leftClick={() => this.props.navigation.goBack()}
+          title=""
+        />
         <View
           style={{
             margin: heightPercentageToDP(1),

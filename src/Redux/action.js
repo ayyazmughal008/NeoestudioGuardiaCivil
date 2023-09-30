@@ -128,6 +128,7 @@ var login = 'loginStudent',
   leaveBattle = 'battle/leavebattle',
   rescheduleExamAll = 'rescheduleExamAll',
   resetprogram = 'resetprogram',
+  resetallactivites = 'resetallactivites',
   rejectionoptions = 'rejectionoptions',
   questionqueries = 'questionqueries',
   blocked = 'blocked',
@@ -3410,6 +3411,33 @@ export const deleteMyUser = async userId => {
       },
       body: JSON.stringify({
         studentId: userId,
+      }),
+    })
+      .then(res => res.json())
+      .then(json => {
+        console.log(json);
+        return json;
+      })
+      .catch(error => {
+        console.log('response error ===>', error);
+      });
+  } catch (error) {
+    console.log('my error' + error.message);
+  }
+  return api;
+};
+
+export const resetAllActivities = async (studentId) => {
+  let api;
+  try {
+    api = await fetch(baseUrl + resetallactivites, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        studentId: studentId,
       }),
     })
       .then(res => res.json())

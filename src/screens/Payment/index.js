@@ -321,7 +321,7 @@ const IAPurchase = props => {
             </View>
             {/* Oro section start */}
 
-            <Text
+            {/* <Text
               style={[
                 styles.title,
                 {
@@ -465,7 +465,7 @@ const IAPurchase = props => {
                 ]}>
                 {products[4].localizedPrice}
               </Text>
-            </View>
+            </View> */}
 
             {/* Diamante section start */}
             <Text

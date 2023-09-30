@@ -6,7 +6,7 @@ import {fonts} from '../../utils';
 
 export default class Header extends React.Component {
   render() {
-    const {iconName, leftClick, title, isActivity} = this.props;
+    const {iconName, leftClick, title, isActivity, isPdf} = this.props;
     return (
       <View
         style={{
@@ -15,7 +15,9 @@ export default class Header extends React.Component {
           alignItems: 'center',
           //justifyContent:"center",
           flexDirection: 'row',
-          marginTop: isActivity
+          marginTop: isPdf
+            ? 0
+            : isActivity
             ? heightPercentageToDP(2)
             : Platform.OS === 'android'
             ? heightPercentageToDP(5)

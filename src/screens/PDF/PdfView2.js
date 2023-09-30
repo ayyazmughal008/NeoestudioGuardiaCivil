@@ -16,6 +16,7 @@ import {
   widthPercentageToDP,
   heightPercentageToDP,
 } from '../../Component/MakeMeResponsive';
+import Header from '../../Component/Header';
 
 class PdfView extends React.Component {
   constructor(props) {
@@ -64,6 +65,12 @@ class PdfView extends React.Component {
     const {AuthLoading, login} = this.props.user;
     return (
       <View style={{flex: 1, alignItems: 'center'}}>
+        <Header
+          isPdf={true}
+          iconName="left"
+          leftClick={() => this.props.navigation.goBack()}
+          title=""
+        />
         <View
           style={{
             margin: heightPercentageToDP(1),

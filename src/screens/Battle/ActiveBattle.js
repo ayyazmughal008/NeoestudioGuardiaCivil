@@ -60,7 +60,7 @@ const battle = props => {
       <Header
         iconName="left"
         leftClick={() => props.navigation.goBack()}
-        title="Batalla"
+        title="Tests a la carta"
       />
 
       <View style={styles.batlleView}>

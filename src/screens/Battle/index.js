@@ -51,7 +51,7 @@ const battle = props => {
       <Header
         iconName="left"
         leftClick={() => this.props.navigation.goBack()}
-        title="Batalla"
+        title="Tests a la carta"
       />
 
       <View style={styles.directoryView}>

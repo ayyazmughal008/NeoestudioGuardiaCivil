@@ -136,16 +136,16 @@ class Test extends Component {
       this._handleAppStateChange,
     );
     this.interval = setInterval(() => this.getData(), 5000);
-    this.interval2 = setInterval(() => {
-      this.props.joinMyBattle(
-        login.data.id,
-        login.data.type,
-        battle_id,
-        null,
-        null,
-        null,
-      );
-    }, this.state.timeInterval);
+    // this.interval2 = setInterval(() => {
+    //   this.props.joinMyBattle(
+    //     login.data.id,
+    //     login.data.type,
+    //     battle_id,
+    //     null,
+    //     null,
+    //     null,
+    //   );
+    // }, this.state.timeInterval);
   }
   changeArray = () => {
     const {battaleQues} = this.props.user;

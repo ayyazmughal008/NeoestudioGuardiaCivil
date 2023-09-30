@@ -400,7 +400,7 @@ class Home extends Component {
         return AuthLoading
         ? false
         : (this.test(), this.props.navigation.navigate('Settings'));
-      case 23:
+      case 24:
         return AuthLoading ? false : (this.test(), this.logoutApi());
     }
   };
