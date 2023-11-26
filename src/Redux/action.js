@@ -2978,6 +2978,7 @@ export const startNewBattle = async (
   studentType,
   exams_ids,
   sendNoti,
+  NumberOfQuestions,
 ) => {
   let api;
   try {
@@ -2991,6 +2992,7 @@ export const startNewBattle = async (
         studentId: studentId,
         studentType: studentType,
         exams_ids: exams_ids,
+        NumberOfQuestions: NumberOfQuestions,
       }),
     })
       .then(res => res.json())
@@ -3427,7 +3429,7 @@ export const deleteMyUser = async userId => {
   return api;
 };
 
-export const resetAllActivities = async (studentId) => {
+export const resetAllActivities = async studentId => {
   let api;
   try {
     api = await fetch(baseUrl + resetallactivites, {

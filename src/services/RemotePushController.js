@@ -69,7 +69,6 @@ const RemotePushController = props => {
       created => console.log(`createChannel returned '${created}'`), // (optional) callback returns whether the channel was created, false means it already existed.
     );
     const unsubscribe = messaging().onMessage(async remoteMessage => {
-      console.log(remoteMessage);
       PushNotification.localNotification({
         channelId: 'neoestudio-id',
         message: remoteMessage.notification.body,

@@ -45,6 +45,11 @@ class News extends React.Component {
         style={styles.container}
         source={require('../../Images/bg.png')}
         resizeMode={FastImage.resizeMode.stretch}>
+        <Header
+          iconName="left"
+          leftClick={() => this.props.navigation.goBack()}
+          title={'Tablón de ' + '\n' + 'anuncios'}
+        />
         <FastImage
           style={styles.logo}
           source={
@@ -54,11 +59,7 @@ class News extends React.Component {
           }
           resizeMode={FastImage.resizeMode.cover}
         />
-        <Header
-          iconName="left"
-          leftClick={() => this.props.navigation.goBack()}
-          title={'Tablón de ' + '\n' + 'anuncios'}
-        />
+
         <View style={styles.directoryView}>
           <ScrollView contentContainerStyle={{flexGrow: 1}}>
             {!newsItem ? (

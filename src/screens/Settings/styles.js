@@ -21,8 +21,9 @@ export const styles = StyleSheet.create({
   },
   mainContainer:{
     flex: 1,
-    width: widthPercentageToDP(100),
+    width: widthPercentageToDP(90),
     marginTop: heightPercentageToDP(5),
+    alignSelf:"center"
     //backgroundColor:'red'
   },
   mainTitle:{
@@ -33,9 +34,9 @@ export const styles = StyleSheet.create({
   },
   rowView:{
     marginTop: heightPercentageToDP(4),
-    width: widthPercentageToDP(95),
+    width: widthPercentageToDP(90),
     height: heightPercentageToDP(7),
-    alignSelf:"center",
+    //alignSelf:"center",
     flexDirection:"row",
     alignItems:"center",
     justifyContent:"space-between"

@@ -231,7 +231,7 @@ export default class HomeMenu extends React.Component {
                   />
                   <Badge
                     status="error"
-                    value={allAppCount === 0 ? ' ' : allAppCount}
+                    value={allAppCount == 0 ? ' ' : allAppCount}
                     containerStyle={{
                       position: 'absolute',
                       top: 20,

@@ -63,7 +63,21 @@ import LinearGradient from 'react-native-linear-gradient';
 import Stars from './stars';
 import ModalBox from '../../Component/Modal';
 import {fonts} from '../../utils';
-import IAP, {purchaseErrorListener} from 'react-native-iap';
+import {
+  initConnection,
+  purchaseErrorListener,
+  purchaseUpdatedListener,
+  getProducts,
+  getSubscriptions,
+  requestPurchase,
+  finishTransaction,
+  clearProductsIOS,
+  ProductPurchase,
+  PurchaseError,
+  validateReceiptIos,
+  flushFailedPurchasesCachedAsPendingAndroid,
+  getPurchaseHistory,
+} from 'react-native-iap';
 
 class Home extends Component {
   constructor(props) {
@@ -142,13 +156,13 @@ class Home extends Component {
     const {navigation} = this.props;
     const {login} = this.props.user;
     if (Platform.OS === 'ios') {
-      IAP.initConnection()
+      initConnection()
         .catch(error => {
           console.log(error);
         })
         .then(() => {
           console.log('connecting to store ...');
-          IAP.getPurchaseHistory()
+          getPurchaseHistory()
             .then(res => {
               const receipt = res[res.length - 1].transactionReceipt;
               if (receipt) {
@@ -182,13 +196,13 @@ class Home extends Component {
     });
   }
   fetchReceipt = () => {
-    IAP.initConnection()
+    initConnection()
       .catch(error => {
         console.log(error);
       })
       .then(() => {
         console.log('connecting to store ...');
-        IAP.getPurchaseHistory()
+        getPurchaseHistory()
           .then(res => {
             const receipt = res[res.length - 1].transactionReceipt;
             if (receipt) {
@@ -215,7 +229,7 @@ class Home extends Component {
   async openLink() {
     const {login} = this.props.user;
     try {
-      const url = 'https://neoestudio.net/main/';
+      const url = 'https://neoestudio.net/';
       //const url = 'https://neoestudioguardiaciviloposiciones.es/payment/16/nul'
       if (await InAppBrowser.isAvailable()) {
         const result = await InAppBrowser.open(url, {
@@ -398,8 +412,8 @@ class Home extends Component {
           : this.props.navigation.navigate('Payment');
       case 23:
         return AuthLoading
-        ? false
-        : (this.test(), this.props.navigation.navigate('Settings'));
+          ? false
+          : (this.test(), this.props.navigation.navigate('Settings'));
       case 24:
         return AuthLoading ? false : (this.test(), this.logoutApi());
     }
@@ -513,10 +527,11 @@ class Home extends Component {
       reviewRanking,
       allNotifications,
       RV_Images,
+      token
     } = this.props.user;
     const {verSionPopUp, avatarPopUp, selectImage, isFcous, rating, isConfirm} =
       this.state;
-    //console.log('====>', moment.parseZone(login.data.expiry_date).utcOffset())
+      // console.log(token);
     return (
       <FastImage
         style={styles.bg}
@@ -623,12 +638,12 @@ class Home extends Component {
                   isNewItem={
                     !allNotifications
                       ? false
-                      : allNotifications.data[index].isActive
+                      : allNotifications?.data[index]?.isActive
                   }
                   allAppCount={
                     !allNotifications
                       ? false
-                      : allNotifications.data[index].count
+                      : allNotifications.data[index]?.count
                   }
                   clickHandler={() => this.navigationHandler(index)}
                 />

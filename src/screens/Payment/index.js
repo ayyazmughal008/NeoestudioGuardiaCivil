@@ -20,7 +20,20 @@ import {
   widthPercentageToDP,
 } from '../../Component/MakeMeResponsive';
 import {showHUD, hideHUD} from '../../Component/Loader';
-import IAP, {purchaseErrorListener} from 'react-native-iap';
+import {
+  initConnection,
+  purchaseErrorListener,
+  purchaseUpdatedListener,
+  getProducts,
+  getSubscriptions,
+  requestPurchase,
+  finishTransaction,
+  clearProductsIOS,
+  ProductPurchase,
+  PurchaseError,
+  validateReceiptIos,
+  flushFailedPurchasesCachedAsPendingAndroid,
+} from 'react-native-iap';
 import {validate} from '@babel/types';
 import {updateSubscription} from '../../Redux/action';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -53,40 +66,87 @@ const IAPurchase = props => {
   const [packagePlan, setPackage] = useState('');
   const [myReceipt, setMyReceipt] = useState('');
 
+   // in app purchase variables
+   let purchaseUpdateSubscription = null;
+   let purchaseErrorSubscription = null;
+
+  // useEffect(() => {
+  //   IAP.initConnection()
+  //     .catch(error => {
+  //       console.log(error);
+  //     })
+  //     .then(() => {
+  //       console.log('connecting to store ...');
+  //       getSubscriptions();
+  //     });
+  //   purchaseErrorListner = IAP.purchaseErrorListener(error => {
+  //     setLoading(false);
+  //     console.log(error);
+  //   });
+  //   purchaseUpdateListner = IAP.purchaseUpdatedListener(purchase => {
+  //     try {
+  //       const recipt = purchase.transactionReceipt;
+  //       setMyReceipt(recipt);
+  //       //setPurchase(true)
+  //     } catch (error) {
+  //       setLoading(false);
+  //       console.log(error);
+  //     }
+  //   });
+  // }, []);
+
   useEffect(() => {
-    IAP.initConnection()
-      .catch(error => {
-        console.log(error);
-      })
-      .then(() => {
-        console.log('connecting to store ...');
-        getSubscriptions();
-      });
-    purchaseErrorListner = IAP.purchaseErrorListener(error => {
-      setLoading(false);
-      console.log(error);
-    });
-    purchaseUpdateListner = IAP.purchaseUpdatedListener(purchase => {
-      try {
-        const recipt = purchase.transactionReceipt;
-        setMyReceipt(recipt);
-        //setPurchase(true)
-      } catch (error) {
-        setLoading(false);
-        console.log(error);
+    if (Platform.OS === 'ios') {
+        initConnection()
+          .catch(error => {
+            console.log(error);
+          })
+          .then(() => {
+            getSubscription();
+          });
+        purchaseErrorSubscription = purchaseErrorListener(error => {
+          setLoading(false);
+          console.log(error);
+        });
+        purchaseUpdateSubscription = purchaseUpdatedListener(purchase => {
+          try {
+            const recipt = purchase?.transactionReceipt;
+            setLoading(false);
+            setMyReceipt(recipt);
+            if (recipt) {
+              updateMyPackage(amount, tenure, packagePlan);
+              //console.log('in finish');
+              finishTranc(purchase);
+            }
+          } catch (error) {
+            // setLoading(false);
+            console.log(error);
+          }
+        });
+     
+    }
+    return () => {
+      if (purchaseUpdateSubscription) {
+        purchaseUpdateSubscription.remove();
+        purchaseUpdateSubscription = null;
       }
-    });
+
+      if (purchaseErrorSubscription) {
+        purchaseErrorSubscription.remove();
+        purchaseErrorSubscription = null;
+      }
+    };
   }, []);
 
-  const getSubscriptions = async () => {
+  const getSubscription = async () => {
     setLoading(true);
     try {
-      const products = await IAP.getSubscriptions(items);
-      console.log(products);
+      const products = await getSubscriptions({skus: items});
+      console.log('-->',products);
       setProducts(products);
       setLoading(false);
     } catch (err) {
-      console.log(err);
+      console.log('error -->',err);
       setLoading(false);
     }
   };
@@ -119,12 +179,6 @@ const IAPurchase = props => {
       });
   };
 
-  useEffect(() => {
-    if (myReceipt) {
-      updateMyPackage(amount, tenure, packagePlan);
-    }
-  }, [amount, tenure, packagePlan, myReceipt]);
-
   const updateMyPackage = async (amount, tenure, packagePlan) => {
     await updateSubscription(
       login.data.id,
@@ -133,7 +187,19 @@ const IAPurchase = props => {
       packagePlan,
       'success',
     );
-    await setLoading(false);
+     setLoading(false);
+  };
+
+  const requestPurchaseItem = async sku => {
+    try {
+      setLoading(true);
+      await requestPurchase({
+        sku,
+        andDangerouslyFinishTransactionAutomaticallyIOS: false,
+      });
+    } catch (err) {
+      Alert.alert('Error', err?.message)
+    }
   };
 
   return (
@@ -141,25 +207,6 @@ const IAPurchase = props => {
       source={require('../../Images/bg.png')}
       resizeMode={FastImage.resizeMode.stretch}
       style={styles.container}>
-      {/* <TouchableOpacity
-                style={{
-                    zIndex: 1,
-                    position: 'absolute',
-                    left: "3%",
-                    top: "4%",
-                    alignItem: "center",
-                    with: widthPercentageToDP(7),
-                    height: widthPercentageToDP(7),
-                    //backgroundColor:"red"
-                }}
-                onPress={() => props.navigation.goBack()}
-            >
-                <Icon
-                    name="left"
-                    color="#707070"
-                    size={widthPercentageToDP(7)}
-                />
-            </TouchableOpacity> */}
       <FastImage
         source={
           Platform.OS === 'android'
@@ -209,7 +256,8 @@ const IAPurchase = props => {
                     setPackage('4'),
                     setTenure('monthly'),
                     setAmount(products[2].price.toString()),
-                    IAP.requestSubscription(products[2]['productId']);
+                    requestPurchaseItem(products[2]['productId'])
+                    //IAP.requestSubscription(products[2]['productId']);
                 }}>
                 <FastImage
                   source={{
@@ -220,7 +268,7 @@ const IAPurchase = props => {
                   style={{width: '100%', height: '100%'}}
                 />
               </TouchableOpacity>
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 style={{width: '33%', height: '100%'}}
                 onPress={() => {
                   setLoading(true);
@@ -237,7 +285,7 @@ const IAPurchase = props => {
                   resizeMode={FastImage.resizeMode.contain}
                   style={{width: '100%', height: '100%'}}
                 />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
               <TouchableOpacity
                 style={{width: '33%', height: '100%'}}
                 onPress={() => {
@@ -245,7 +293,8 @@ const IAPurchase = props => {
                   setPackage('4');
                   setTenure('annual');
                   setAmount(products[1].price);
-                  IAP.requestSubscription(products[1]['productId']);
+                  requestPurchaseItem(products[1]['productId'])
+                  // IAP.requestSubscription(products[1]['productId']);
                 }}>
                 <FastImage
                   source={{
@@ -286,7 +335,7 @@ const IAPurchase = props => {
                   {'/mes'}
                 </Text>
               </Text>
-              <Text
+              {/* <Text
                 style={[
                   styles.title,
                   {
@@ -306,7 +355,7 @@ const IAPurchase = props => {
                   ]}>
                   {'\n' + 'durante 6 meses'}
                 </Text>
-              </Text>
+              </Text> */}
               <Text
                 style={[
                   styles.title,
@@ -503,7 +552,8 @@ const IAPurchase = props => {
                   setPackage('6');
                   setTenure('monthly');
                   setAmount(products[8].price);
-                  IAP.requestSubscription(products[8]['productId']);
+                  // IAP.requestSubscription(products[8]['productId']);
+                  requestPurchaseItem(products[8]['productId'])
                 }}>
                 <FastImage
                   source={{
@@ -514,14 +564,15 @@ const IAPurchase = props => {
                   style={{width: '100%', height: '100%'}}
                 />
               </TouchableOpacity>
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 style={{width: '33%', height: '100%'}}
                 onPress={() => {
                   setLoading(true);
                   setPackage('6');
                   setTenure('fractional');
                   setAmount(products[0].price);
-                  IAP.requestSubscription(products[0]['productId']);
+                  requestPurchaseItem(products[0]['productId'])
+                  // IAP.requestSubscription(products[0]['productId']);
                 }}>
                 <FastImage
                   source={{
@@ -531,7 +582,7 @@ const IAPurchase = props => {
                   resizeMode={FastImage.resizeMode.contain}
                   style={{width: '100%', height: '100%'}}
                 />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
               <TouchableOpacity
                 style={{width: '33%', height: '100%'}}
                 onPress={() => {
@@ -539,7 +590,8 @@ const IAPurchase = props => {
                   setPackage('6');
                   setTenure('annual');
                   setAmount(products[6].price);
-                  IAP.requestSubscription(products[6]['productId']);
+                  //IAP.requestSubscription(products[6]['productId']);
+                  requestPurchaseItem(products[6]['productId'])
                 }}>
                 <FastImage
                   source={{
@@ -580,7 +632,7 @@ const IAPurchase = props => {
                   {'/mes'}
                 </Text>
               </Text>
-              <Text
+              {/* <Text
                 style={[
                   styles.title,
                   {
@@ -600,7 +652,7 @@ const IAPurchase = props => {
                   ]}>
                   {'\n' + 'durante 6 meses'}
                 </Text>
-              </Text>
+              </Text> */}
               <Text
                 style={[
                   styles.title,

@@ -20,6 +20,7 @@ import {
 } from '../../Redux/action';
 import ModalBox from './Model';
 import Orientation from 'react-native-orientation-locker';
+import {widthPercentageToDP} from '../../Component/MakeMeResponsive';
 
 const battle = props => {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ const battle = props => {
   const [myArray3, setArray3] = useState([]);
   const [myArray4, setArray4] = useState([]);
   const [myArray5, setArray5] = useState([]);
+  const [numOfQues, setNumOfQues] = useState(25);
 
   useEffect(() => {
     apiCall();
@@ -49,6 +51,7 @@ const battle = props => {
       login.data.type,
       fourthArray,
       sendNoti,
+      numOfQues
     );
     setLoading(false);
     if (result.status === 'Successfull') {
@@ -203,6 +206,21 @@ const battle = props => {
     setResponse(temArr);
   };
 
+  const plusFunc = () => {
+    let sum = 1;
+    sum = sum + numOfQues;
+    setNumOfQues(sum);
+  };
+  const minusFunc = () => {
+    let sum = 1;
+    if (numOfQues == 25) {
+      return;
+    } else {
+      sum = numOfQues - sum;
+      setNumOfQues(sum);
+    }
+  };
+
   useEffect(() => {
     props.navigation.addListener('didFocus', () => {
       const locked = Orientation.isLocked();
@@ -235,6 +253,51 @@ const battle = props => {
       <View style={styles.batlleView}>
         <ScrollView contentContainerStyle={{flexGrow: 1}}>
           {/* Conocimientos */}
+          <View
+            style={{
+              flexDirection: 'row-reverse',
+              width: '100%',
+              marginRight: widthPercentageToDP(-2),
+              alignItems: 'center',
+            }}>
+            <TouchableOpacity onPress={() => minusFunc()} style={styles.box2}>
+              <FastImage
+                source={require('../../Images/minus.png')}
+                resizeMode={FastImage.resizeMode.contain}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                }}
+              />
+            </TouchableOpacity>
+            <View
+              style={[
+                styles.box,
+                {
+                  backgroundColor: 'white',
+                  //marginRight: widthPercentageToDP(2),
+                },
+              ]}>
+              <Text style={styles.operatorTxt}>{numOfQues}</Text>
+            </View>
+            <TouchableOpacity onPress={() => plusFunc()} style={styles.box2}>
+              <FastImage
+                source={require('../../Images/plus.png')}
+                resizeMode={FastImage.resizeMode.contain}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                }}
+              />
+            </TouchableOpacity>
+            <Text
+              style={[
+                styles.folderName,
+                {color: 'black', marginRight: widthPercentageToDP(2)},
+              ]}>
+              {'Preguntas'}
+            </Text>
+          </View>
           <View style={styles.folderView}>
             <FastImage
               source={require('../../Images/empty_box.png')}

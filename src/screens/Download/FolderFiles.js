@@ -98,18 +98,17 @@ class FolderFiles extends React.Component {
       addAndroidDownloads: {
         useDownloadManager: true,
         notification: true,
-        path:
-          DownloadDir +
-          '/NeoeStudio_' +
-          Math.floor(date.getTime() + date.getSeconds() / 2) +
-          ext,
+        mediaScannable: true,
+        storeInDownloads: true,
+        mime: 'application/pdf',
+        path: DownloadDir +'/NeoeStudio_' + Math.floor(date.getTime() + date.getSeconds() / 2) + ext,
         description: 'NeoeStudio',
       },
     };
     config(options)
       .fetch('GET', url)
       .then(res => {
-        console.log('is download --->', res);
+        //console.log('is download --->', res);
         //Alert.alert("Successfully Downloaded");
         this.setState({isOpen: false});
         this.props.dispatchText();

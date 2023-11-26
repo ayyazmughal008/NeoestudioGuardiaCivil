@@ -571,7 +571,7 @@ PODS:
     - React-Core
   - RNGestureHandler (1.10.3):
     - React-Core
-  - RNIap (7.5.6):
+  - RNIap (12.11.0):
     - React-Core
   - RNImageCropPicker (0.37.3):
     - React-Core
@@ -1033,7 +1033,7 @@ SPEC CHECKSUMS:
   RNFileViewer: ce7ca3ac370e18554d35d6355cffd7c30437c592
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
-  RNIap: d248609d1b8937e63bd904e865c318e9b1457eff
+  RNIap: fc9af04ee706894a80c9d8f979bae930b0dee191
   RNImageCropPicker: 44e2807bc410741f35d4c45b6586aedfe3da39d2
   RNInAppBrowser: e36d6935517101ccba0e875bac8ad7b0cb655364
   RNReanimated: 1f117be601c59177816351a965bc57320b766c15

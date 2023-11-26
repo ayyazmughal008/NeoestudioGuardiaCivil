@@ -59,11 +59,13 @@ const Settings = props => {
     }
   };
 
+  console.log(login.data.baremo);
+
   return (
     <FastImage
       style={styles.root}
       resizeMode={FastImage.resizeMode.stretch}
-      source={require('../../Images/bg.png')}>
+      source={require('../Exames/assets/back3.png')}>
       <FastImage
         source={
           Platform.OS === 'android'
@@ -79,34 +81,21 @@ const Settings = props => {
         title={'Ajustes'}
       />
       <View style={styles.mainContainer}>
-        {/* <Text style={styles.mainTitle}>{'Gestiona tu cuenta'}</Text> */}
-        <View style={styles.rowView}>
-          <Text style={styles.itemTitle}>{'Borrar usuario'}</Text>
-          <TouchableOpacity onPress={() => setpop(true)} style={styles.btn}>
-            <FastImage
-              source={require('../../Images/button.png')}
-              resizeMode={'contain'}
-              style={styles.imgBtn}>
-              <Text
-                style={[
-                  styles.itemTitle,
-                  {color: 'white', fontSize: widthPercentageToDP(3.5)},
-                ]}>
-                {'Confirmar'}
-              </Text>
-            </FastImage>
-          </TouchableOpacity>
+         {/* reset exames */}
+         <View style={[styles.rowView, {marginTop: 0, width: widthPercentageToDP(75)}]}>
+          <Text style={styles.itemTitle}>{'Puntos de baremo'}</Text>
+          <Text style={styles.itemTitle}>{login.data.baremo}</Text>
         </View>
         {/* Notification Block */}
-        <View style={[styles.rowView, {marginTop: 0}]}>
+        <View style={[styles.rowView, {marginTop: 0, width: widthPercentageToDP(80)}]}>
           <Text style={styles.itemTitle}>{'Notificaciones Push'}</Text>
           <ToggleSwitch
             isOn={isNoti}
-            onColor="#00a7cb"
-            offColor="#006176"
+            onColor="green"
+            offColor="red"
             //label="Example label"
             labelStyle={{color: 'black', fontWeight: '900'}}
-            size="large"
+            size='small'
             onToggle={isOn => setNoti(isOn)}
           />
         </View>
@@ -144,6 +133,24 @@ const Settings = props => {
                   {color: 'white', fontSize: widthPercentageToDP(3.5)},
                 ]}>
                 {'Reiniciar'}
+              </Text>
+            </FastImage>
+          </TouchableOpacity>
+        </View>
+        {/* <Text style={styles.mainTitle}>{'Gestiona tu cuenta'}</Text> */}
+        <View style={[styles.rowView,{marginTop:0}]}>
+          <Text style={styles.itemTitle}>{'Borrar usuario'}</Text>
+          <TouchableOpacity onPress={() => setpop(true)} style={styles.btn}>
+            <FastImage
+              source={require('../../Images/button.png')}
+              resizeMode={'contain'}
+              style={styles.imgBtn}>
+              <Text
+                style={[
+                  styles.itemTitle,
+                  {color: 'white', fontSize: widthPercentageToDP(3.5)},
+                ]}>
+                {'Confirmar'}
               </Text>
             </FastImage>
           </TouchableOpacity>
