@@ -134,6 +134,7 @@ var login = 'loginStudent',
   blocked = 'blocked',
   success = 'success',
   reviewExam = 'reviewExam',
+  updatebaremo = 'updatebaremo',
   deleteuser = 'deleteuser';
 // ====================//
 
@@ -3445,6 +3446,38 @@ export const resetAllActivities = async studentId => {
       .then(res => res.json())
       .then(json => {
         console.log(json);
+        return json;
+      })
+      .catch(error => {
+        console.log('response error ===>', error);
+      });
+  } catch (error) {
+    console.log('my error' + error.message);
+  }
+  return api;
+};
+
+export const updateUserBaremo = async (studentId, baremo) => {
+  let api;
+  try {
+    api = await fetch(baseUrl + updatebaremo, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        studentId: studentId,
+        baremo: baremo,
+      }),
+    })
+      .then(res => res.json())
+      .then(json => {
+        if (json?.status === 'Success') {
+          Alert.alert('', 'Baremo se actualizó exitosamente.');
+        }else {
+          Alert.alert('Error', json?.message);
+        }
         return json;
       })
       .catch(error => {

@@ -338,6 +338,7 @@ class ExamScreen extends React.Component {
                             //console.log("hiiii")
                             return (
                               <ExamLayout
+                                isApto={item1?.isApto}
                                 text={item1.name}
                                 status={item1.studentStatus}
                                 activeStatus={item1.activeStatus}
@@ -403,6 +404,7 @@ class ExamScreen extends React.Component {
                           {item.Inglés.map((item2, index2) => {
                             return (
                               <ExamLayout
+                                isApto={item2?.isApto}
                                 text={item2.name}
                                 status={item2.studentStatus}
                                 activeStatus={item2.activeStatus}
@@ -467,6 +469,7 @@ class ExamScreen extends React.Component {
                           {item.Psicotécnicos.map((item3, index3) => {
                             return (
                               <ExamLayout
+                                isApto={item3?.isApto}
                                 text={item3.name}
                                 status={item3.studentStatus}
                                 activeStatus={item3.activeStatus}
@@ -531,6 +534,7 @@ class ExamScreen extends React.Component {
                           {item.Ortografía.map((item4, index4) => {
                             return (
                               <ExamLayout
+                                isApto={item4?.isApto}
                                 text={item4.name}
                                 status={item4.studentStatus}
                                 activeStatus={item4.activeStatus}

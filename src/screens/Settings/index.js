@@ -17,15 +17,21 @@ import {
   logout,
   resetAllActivities,
   resetAllExams,
+  updateUserBaremo,
+  getCurrentUser,
 } from '../../Redux/action';
 import {useSelector, useDispatch} from 'react-redux';
 import ToggleSwitch from 'toggle-switch-react-native';
+import BaremoUpdate from '../../Component/BaremoModal';
 
 const Settings = props => {
   const dispatch = useDispatch();
   const [isPopUp, setpop] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [isNoti, setNoti] = useState(false);
+  const [baremoTxt, setBaremo] = useState(0);
+  const [baremoModal, showBaremo] = useState(false);
+
   const login = useSelector(state => state.user.login);
   const AuthLoading = useSelector(state => state.user.AuthLoading);
   const text = 'User has been deleted !';
@@ -40,6 +46,13 @@ const Settings = props => {
     } else {
       Alert.alert('Solicitud fallida', response?.message);
     }
+  };
+
+  const barempApiCall = async () => {
+    setLoading(true);
+    const response = await updateUserBaremo(login?.data?.id, baremoTxt);
+    setLoading(false);
+    dispatch(getCurrentUser(login?.data?.id));
   };
 
   const logoutApi = async () => {
@@ -58,8 +71,6 @@ const Settings = props => {
       Alert.alert('', 'Todas las actividades se han reiniciado.');
     }
   };
-
-  console.log(login.data.baremo);
 
   return (
     <FastImage
@@ -81,13 +92,23 @@ const Settings = props => {
         title={'Ajustes'}
       />
       <View style={styles.mainContainer}>
-         {/* reset exames */}
-         <View style={[styles.rowView, {marginTop: 0, width: widthPercentageToDP(75)}]}>
+        {/* reset exames */}
+        <View
+          style={[
+            styles.rowView,
+            {marginTop: 0, width: widthPercentageToDP(75)},
+          ]}>
           <Text style={styles.itemTitle}>{'Puntos de baremo'}</Text>
-          <Text style={styles.itemTitle}>{login.data.baremo}</Text>
+          <Text onPress={() => showBaremo(true)} style={styles.itemTitle}>
+            {login.data.baremo}
+          </Text>
         </View>
         {/* Notification Block */}
-        <View style={[styles.rowView, {marginTop: 0, width: widthPercentageToDP(80)}]}>
+        <View
+          style={[
+            styles.rowView,
+            {marginTop: 0, width: widthPercentageToDP(80)},
+          ]}>
           <Text style={styles.itemTitle}>{'Notificaciones Push'}</Text>
           <ToggleSwitch
             isOn={isNoti}
@@ -95,7 +116,7 @@ const Settings = props => {
             offColor="red"
             //label="Example label"
             labelStyle={{color: 'black', fontWeight: '900'}}
-            size='small'
+            size="small"
             onToggle={isOn => setNoti(isOn)}
           />
         </View>
@@ -138,7 +159,7 @@ const Settings = props => {
           </TouchableOpacity>
         </View>
         {/* <Text style={styles.mainTitle}>{'Gestiona tu cuenta'}</Text> */}
-        <View style={[styles.rowView,{marginTop:0}]}>
+        <View style={[styles.rowView, {marginTop: 0}]}>
           <Text style={styles.itemTitle}>{'Borrar usuario'}</Text>
           <TouchableOpacity onPress={() => setpop(true)} style={styles.btn}>
             <FastImage
@@ -181,6 +202,23 @@ const Settings = props => {
           color={'black'}
         />
       )}
+      <BaremoUpdate
+        isOpen={baremoModal}
+        baremoText={text => setBaremo(text)}
+        yesClick={() => {
+          //console.log('hii',baremoTxt);
+          if (baremoTxt === 0) {
+            Alert.alert('', 'Por favor escriba un número baremo válido.');
+          } else {
+            showBaremo(false);
+            barempApiCall();
+          }
+        }}
+        noClick={() => {
+          showBaremo(false);
+        }}
+        //myText = {""}
+      />
     </FastImage>
   );
 };

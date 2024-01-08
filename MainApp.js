@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, AppState} from 'react-native';
+import {View, AppState, Linking} from 'react-native';
 import PropTypes from 'prop-types';
 import NAVIGATOR, {navigationService} from './src/navigator';
 import MainNavigator from './src/MainNavigator';
@@ -11,14 +11,24 @@ import {
   updateUserRankPoint,
   updateLoginTime,
   updateLogoutTime,
+  getUserVideos,
 } from './src/Redux/action';
 import Dialog from './src/Component/DailogBox';
 import Toast from './src/Component/Toast';
 import messaging from '@react-native-firebase/messaging';
+import Orientation from 'react-native-orientation-locker';
 
 class MainApp extends React.Component {
   state = {
     appState: AppState.currentState,
+  };
+
+  fetchVideoData = async () => {
+    await getUserVideos('Alumno');
+  };
+
+  test = () => {
+    Orientation.unlockAllOrientations();
   };
 
   async componentDidMount() {
@@ -33,34 +43,87 @@ class MainApp extends React.Component {
     }
     messaging().onMessage(async remoteMessage => {
       console.log('===>', remoteMessage);
-      // if (remoteMessage.data.type == "holiday") {
-      //   navigationService.navigate("Vocation")
-      // }
-      // else {
-      //   alert("No data")
-      // }
     });
     messaging().setBackgroundMessageHandler(async remoteMessage => {
       console.log('Message handled in the background!', remoteMessage);
-      // if (remoteMessage.data.type == "holiday") {
-      //   navigationService.navigate("Vocation")
-      // }
-      // else {
-      //   alert("No data")
-      // }
+      if (remoteMessage?.data?.isweb) {
+        Linking.openURL(remoteMessage?.data?.link);
+      } else {
+        if (remoteMessage?.data?.screen === 'Actividades') {
+          {
+            this.test(), navigationService.navigate('Actividad');
+          }
+        } else if (remoteMessage?.data?.screen === 'Entrenamiento') {
+          {
+            this.test(), this.fetchVideoData();
+          }
+        } else if (remoteMessage?.data?.screen === 'Clases') {
+          this.test(), navigationService.navigate('Clases');
+        } else if (remoteMessage?.data?.screen === 'Exámenes') {
+          this.test(),
+            navigationService.navigate('ExamFile', {
+              isRefresh: 'false',
+            });
+        } else if (remoteMessage?.data?.screen === 'Temario') {
+          this.test(), navigationService.navigate('PDF');
+        } else if (remoteMessage?.data?.screen === 'Videos') {
+          this.test(), navigationService.navigate('VideoClass');
+        } else if (remoteMessage?.data?.screen === 'Ranking global') {
+          this.test(), navigationService.navigate('GlobalRanking');
+        } else if (remoteMessage?.data?.screen === 'Audiolibro') {
+          this.test(), navigationService.navigate('AudioClass');
+        } else if (remoteMessage?.data?.screen === 'Repaso') {
+          this.test(), navigationService.navigate('ReviewTest');
+        } else if (remoteMessage?.data?.screen === 'Entervista') {
+          this.test(), navigationService.navigate('Personality');
+        } else if (remoteMessage?.data?.screen === 'Descargas') {
+          this.test(), navigationService.navigate('DownUpload');
+        } else {
+          console.log('no screen found');
+        }
+      }
     });
     messaging().onNotificationOpenedApp(remoteMessage => {
       console.log(
         'Notification caused app to open from background state:',
         remoteMessage,
       );
-      // if (remoteMessage.data.type == "holiday") {
-      //   navigationService.navigate("Vocation")
-      // }
-      // else {
-      //   alert("No data")
-      // }
-      // navigation.navigate(remoteMessage.data.type);
+      if (remoteMessage?.data?.isweb) {
+        Linking.openURL(remoteMessage?.data?.link);
+      } else {
+        if (remoteMessage?.data?.screen === 'Actividades') {
+          {
+            this.test(), navigationService.navigate('Actividad');
+          }
+        } else if (remoteMessage?.data?.screen === 'Entrenamiento') {
+          {
+            this.test(), this.fetchVideoData();
+          }
+        } else if (remoteMessage?.data?.screen === 'Clases') {
+          this.test(), navigationService.navigate('Clases');
+        } else if (remoteMessage?.data?.screen === 'Exámenes') {
+          this.test(),
+            navigationService.navigate('ExamFile', {
+              isRefresh: 'false',
+            });
+        } else if (remoteMessage?.data?.screen === 'Temario') {
+          this.test(), navigationService.navigate('PDF');
+        } else if (remoteMessage?.data?.screen === 'Videos') {
+          this.test(), navigationService.navigate('VideoClass');
+        } else if (remoteMessage?.data?.screen === 'Ranking global') {
+          this.test(), navigationService.navigate('GlobalRanking');
+        } else if (remoteMessage?.data?.screen === 'Audiolibro') {
+          this.test(), navigationService.navigate('AudioClass');
+        } else if (remoteMessage?.data?.screen === 'Repaso') {
+          this.test(), navigationService.navigate('ReviewTest');
+        } else if (remoteMessage?.data?.screen === 'Entervista') {
+          this.test(), navigationService.navigate('Personality');
+        } else if (remoteMessage?.data?.screen === 'Descargas') {
+          this.test(), navigationService.navigate('DownUpload');
+        } else {
+          console.log('no screen found');
+        }
+      }
     });
     // Check whether an initial notification is available
     messaging()
@@ -71,9 +134,42 @@ class MainApp extends React.Component {
             'Notification caused app to open from quit state:',
             remoteMessage,
           );
-          // if (remoteMessage.data.type == "holiday") {
-          //   navigationService.navigate("Vocation")
-          // }
+          if (remoteMessage?.data?.isweb) {
+            Linking.openURL(remoteMessage?.data?.link);
+          } else {
+            if (remoteMessage?.data?.screen === 'Actividades') {
+              {
+                this.test(), navigationService.navigate('Actividad');
+              }
+            } else if (remoteMessage?.data?.screen === 'Entrenamiento') {
+              {
+                this.test(), this.fetchVideoData();
+              }
+            } else if (remoteMessage?.data?.screen === 'Clases') {
+              this.test(), navigationService.navigate('Clases');
+            } else if (remoteMessage?.data?.screen === 'Exámenes') {
+              this.test(),
+                navigationService.navigate('ExamFile', {
+                  isRefresh: 'false',
+                });
+            } else if (remoteMessage?.data?.screen === 'Temario') {
+              this.test(), navigationService.navigate('PDF');
+            } else if (remoteMessage?.data?.screen === 'Videos') {
+              this.test(), navigationService.navigate('VideoClass');
+            } else if (remoteMessage?.data?.screen === 'Ranking global') {
+              this.test(), navigationService.navigate('GlobalRanking');
+            } else if (remoteMessage?.data?.screen === 'Audiolibro') {
+              this.test(), navigationService.navigate('AudioClass');
+            } else if (remoteMessage?.data?.screen === 'Repaso') {
+              this.test(), navigationService.navigate('ReviewTest');
+            } else if (remoteMessage?.data?.screen === 'Entervista') {
+              this.test(), navigationService.navigate('Personality');
+            } else if (remoteMessage?.data?.screen === 'Descargas') {
+              this.test(), navigationService.navigate('DownUpload');
+            } else {
+              console.log('no screen found');
+            }
+          }
         }
       });
   }
