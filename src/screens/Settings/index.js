@@ -217,7 +217,7 @@ const Settings = props => {
         noClick={() => {
           showBaremo(false);
         }}
-        //myText = {""}
+        myText = {"Escribe tu escala y presiona el botón Enviar."}
       />
     </FastImage>
   );

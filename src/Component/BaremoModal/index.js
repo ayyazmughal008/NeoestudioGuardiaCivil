@@ -13,13 +13,7 @@ import FastImage from 'react-native-fast-image';
 import DeviceInfo from 'react-native-device-info';
 import {fonts} from '../../utils';
 
-const BaremoUpdate = ({
-  isOpen,
-  yesClick,
-  noClick,
-  myText,
-  baremoText,
-}) => {
+const BaremoUpdate = ({isOpen, yesClick, noClick, myText, baremoText}) => {
   return (
     <Modal
       transparent={true}
@@ -45,7 +39,7 @@ const BaremoUpdate = ({
           <TextInput
             keyboardType="numeric"
             onChangeText={baremoText}
-            placeholder="Escribe Baremo"
+            placeholder="Ejemplo: 4.6"
             placeholderTextColor={'black'}
             style={{
               width: widthPercentageToDP(80),
@@ -59,19 +53,21 @@ const BaremoUpdate = ({
             }}
           />
           <View style={styles.bottomView}>
-            <TouchableOpacity style={styles.confirmBtn} onPress={yesClick}>
-              <FastImage
-                source={require('../../Images/Si.png')}
-                style={styles.btnImage}
-                resizeMode={FastImage.resizeMode.contain}
-              />
-            </TouchableOpacity>
             <TouchableOpacity style={styles.confirmBtn} onPress={noClick}>
               <FastImage
-                source={require('../../Images/No.png')}
+                source={require('../../Images/button.png')}
                 style={styles.btnImage}
-                resizeMode={FastImage.resizeMode.contain}
-              />
+                resizeMode={FastImage.resizeMode.contain}>
+                <Text style={styles.btnTxt}>{'Atrás'}</Text>
+              </FastImage>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.confirmBtn} onPress={yesClick}>
+              <FastImage
+                source={require('../../Images/button.png')}
+                style={styles.btnImage}
+                resizeMode={FastImage.resizeMode.contain}>
+                <Text style={styles.btnTxt}>{'Enviar'}</Text>
+              </FastImage>
             </TouchableOpacity>
           </View>
         </View>
@@ -104,15 +100,15 @@ const styles = StyleSheet.create({
     //justifyContent: "center"
   },
   confirmBtn: {
-    width: widthPercentageToDP(25),
-    height: heightPercentageToDP(5),
+    width: widthPercentageToDP(35),
+    height: widthPercentageToDP(10),
     justifyContent: 'center',
     alignItems: 'center',
     //backgroundColor:"red"
   },
   btnImage: {
-    width: widthPercentageToDP(43),
-    height: widthPercentageToDP(20),
+    width: widthPercentageToDP(35),
+    height: widthPercentageToDP(10),
     //marginTop:heightPercentageToDP(2),
     justifyContent: 'center',
     alignItems: 'center',
@@ -127,6 +123,11 @@ const styles = StyleSheet.create({
     width: widthPercentageToDP(80),
     justifyContent: 'space-around',
     //backgroundColor:"red"
+  },
+  btnTxt: {
+    fontFamily: fonts.novaBold,
+    color: 'white',
+    fontSize: widthPercentageToDP(3.5),
   },
 });
 export default BaremoUpdate;

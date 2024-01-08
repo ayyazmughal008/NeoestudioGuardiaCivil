@@ -32,6 +32,11 @@ class MainApp extends React.Component {
   };
 
   async componentDidMount() {
+    console.log('hiiii 2');
+    this.appStateSubscription = AppState.addEventListener(
+      'change',
+      this._handleAppStateChange,
+    );
     const authStatus = await messaging().requestPermission();
     const enabled =
       authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
@@ -129,6 +134,10 @@ class MainApp extends React.Component {
     messaging()
       .getInitialNotification()
       .then(remoteMessage => {
+        console.log(
+          'Notification caused app to open from quit state:',
+          remoteMessage,
+        );
         if (remoteMessage) {
           console.log(
             'Notification caused app to open from quit state:',
@@ -183,12 +192,9 @@ class MainApp extends React.Component {
     }
   };
 
-  componentDidMount() {
-    this.appStateSubscription = AppState.addEventListener(
-      'change',
-      this._handleAppStateChange,
-    );
-  }
+  // componentDidMount() {
+   
+  // }
 
   componentWillUnmount() {
     this.appStateSubscription.remove();
