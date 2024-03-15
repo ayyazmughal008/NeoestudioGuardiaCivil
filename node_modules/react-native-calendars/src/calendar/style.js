@@ -23,7 +23,6 @@ export default function getStyle(theme = {}) {
             flexDirection: 'row',
             justifyContent: 'space-around'
         },
-        // @ts-expect-error
         ...(theme['stylesheet.calendar.main'] || {})
     });
 }

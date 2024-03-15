@@ -101,6 +101,8 @@ export interface TimelineProps {
      * The left inset of the timeline calendar (sidebar width), default is 72
      */
     timelineLeftInset?: number;
+    /** Identifier for testing */
+    testID?: string;
 }
 export { Event as TimelineEventProps, PackedEvent as TimelinePackedEventProps };
 declare const _default: React.MemoExoticComponent<(props: TimelineProps) => React.JSX.Element>;

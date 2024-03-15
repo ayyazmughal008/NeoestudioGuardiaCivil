@@ -6,20 +6,22 @@ export declare class CalendarListDriver {
     constructor(testID: string, element: React.ReactElement);
     render(element?: React.ReactElement<any, string | React.JSXElementConstructor<any>>): ReturnType<typeof render>;
     /** List */
-    getListProps(): any;
+    getListProps(): {
+        [propName: string]: any;
+    };
     getItemTestID(date: string): string;
-    getListItem(date: string): ReactTestInstance;
-    getListItemTitle(date: string): ReactTestInstance;
+    getListItem(date: string): import("react-test-renderer").ReactTestInstance;
+    getListItemTitle(date: string): import("react-test-renderer").ReactTestInstance;
     /** Static header */
     get staticHeaderTestID(): string;
-    getStaticHeader(): ReactTestInstance;
-    getStaticHeaderTitle(): any;
-    getStaticHeaderLeftArrow(): ReactTestInstance;
-    getStaticHeaderRightArrow(): ReactTestInstance;
+    getStaticHeader(): import("react-test-renderer").ReactTestInstance;
+    getStaticHeaderTitle(): string | import("react-test-renderer").ReactTestInstance;
+    getStaticHeaderLeftArrow(): import("react-test-renderer").ReactTestInstance;
+    getStaticHeaderRightArrow(): import("react-test-renderer").ReactTestInstance;
     pressLeftArrow(): void;
     pressRightArrow(): void;
     /** Day press */
     getDayTestID(date: string): string;
-    getDay(date: string): ReactTestInstance;
+    getDay(date: string): import("react-test-renderer").ReactTestInstance;
     selectDay(date: string): void;
 }

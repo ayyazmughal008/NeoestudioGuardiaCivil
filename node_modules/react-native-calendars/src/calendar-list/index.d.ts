@@ -1,6 +1,6 @@
 import XDate from 'xdate';
 import React from 'react';
-import { ViewStyle, FlatListProps } from 'react-native';
+import { FlatListProps, ViewStyle } from 'react-native';
 import { ContextProp } from '../types';
 import { CalendarProps } from '../calendar';
 export interface CalendarListProps extends CalendarProps, Omit<FlatListProps<any>, 'data' | 'renderItem'> {

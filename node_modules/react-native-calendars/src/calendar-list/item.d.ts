@@ -2,7 +2,7 @@ import XDate from 'xdate';
 import React from 'react';
 import { Theme } from '../types';
 import { CalendarProps } from '../calendar';
-export type CalendarListItemProps = CalendarProps & {
+export declare type CalendarListItemProps = CalendarProps & {
     item: any;
     calendarWidth?: number;
     calendarHeight?: number;

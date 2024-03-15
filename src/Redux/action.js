@@ -44,6 +44,7 @@ export const RANK_AVATAR = 'RANK_AVATAR';
 export const BATTLE_QUESTION = 'BATTLE_QUESTION';
 export const TOAST = 'TOAST';
 export const REJECT_RESON = 'REJECT_RESON';
+export const NOTI_TOGGLE = 'NOTI_TOGGLE';
 
 // ===================================== //
 
@@ -155,6 +156,16 @@ export const saveToken = value => {
       type: TOKEN,
       payload: {
         token: value,
+      },
+    });
+  };
+};
+export const notificationToggle = value => {
+  return dispatch => {
+    dispatch({
+      type: NOTI_TOGGLE,
+      payload: {
+        toggle: value,
       },
     });
   };
@@ -2022,7 +2033,7 @@ export const getAllAppNotification = id => {
     })
       .then(res => res.json())
       .then(json => {
-        //console.log(json);
+        console.log('getAllAppNotification ===>',json);
         dispatch({type: AUTH_LOADING, payload: false});
         if (json.status === 'Successfull') {
           dispatch({

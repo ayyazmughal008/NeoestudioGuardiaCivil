@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
+import { ReactTestInstance } from 'react-test-renderer';
 export declare class ExpandableCalendarDriver {
     testID: string;
     element: React.ReactElement;
@@ -14,7 +15,7 @@ export declare class ExpandableCalendarDriver {
     getLeftArrow(): ReactTestInstance;
     /** Knob and Position */
     get knobTestID(): string;
-    getKnob(): any;
+    getKnob(): ReactTestInstance | null;
     toggleKnob(): void;
     /** CalendarList */
     getCalendarList(): ReactTestInstance;
@@ -27,7 +28,7 @@ export declare class ExpandableCalendarDriver {
     getWeekDay(date: string): ReactTestInstance;
     selectWeekDay(date: string): void;
     /** today button */
-    getTodayButton(): any;
+    getTodayButton(): ReactTestInstance | undefined;
     /** actions */
     pressOnTodayButton(): void;
     pressOnHeaderArrow({ left }?: {

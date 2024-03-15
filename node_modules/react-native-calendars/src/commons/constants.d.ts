@@ -5,5 +5,6 @@ declare const _default: {
     isAndroid: boolean;
     isIOS: boolean;
     isTablet: boolean;
+    isAndroidRTL: boolean;
 };
 export default _default;

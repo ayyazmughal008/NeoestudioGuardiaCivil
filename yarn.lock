@@ -2425,7 +2425,7 @@
   resolved "https://registry.npmjs.org/@react-native-community/viewpager/-/viewpager-4.2.4.tgz"
   integrity sha512-r7iOPPys5MS88VZuqipDadvAAjeW+PE+myhjvboH8rjNHxUUuofJW2uiiRKMSE0/qEyklIpLOCY+S0ZLHHe8Qg==
 
-"@react-native-firebase/app@^18.6.1", "@react-native-firebase/app@18.7.3":
+"@react-native-firebase/app@^18.7.3", "@react-native-firebase/app@18.7.3":
   version "18.7.3"
   resolved "https://registry.npmjs.org/@react-native-firebase/app/-/app-18.7.3.tgz"
   integrity sha512-KlUuLSCYrBMHXE2Evye1fzrqunUjFEPihxcpzuUyJ5yQyAuCNws7VGdEPIaXoKz1esof0uv8wMSxD+G6W+Vi8Q==
@@ -2433,14 +2433,14 @@
     opencollective-postinstall "^2.0.3"
     superstruct "^0.6.2"
 
-"@react-native-firebase/crashlytics@^18.6.1":
+"@react-native-firebase/crashlytics@^18.7.3":
   version "18.7.3"
   resolved "https://registry.npmjs.org/@react-native-firebase/crashlytics/-/crashlytics-18.7.3.tgz"
   integrity sha512-4deBolsDUDZGIunZ/MAXVTO3m9xoHae6kuEQqIg2QJqemOaAixwnAhttwyuUQtRly0X0wC9N6wGKIbyOKUQ8rg==
   dependencies:
     stacktrace-js "^2.0.2"
 
-"@react-native-firebase/messaging@^18.6.1":
+"@react-native-firebase/messaging@^18.7.3":
   version "18.7.3"
   resolved "https://registry.npmjs.org/@react-native-firebase/messaging/-/messaging-18.7.3.tgz"
   integrity sha512-K2l8k9wif5mni85WP940uJjW3agnBqhgSTqtg7y+39EOnYJZ3WhIDpArHttTSbtTVB5OyJ8qLiOQm3gpkaKqPg==
@@ -7126,7 +7126,7 @@ lodash.unset@^4.5.2:
   resolved "https://registry.npmjs.org/lodash.unset/-/lodash.unset-4.5.2.tgz"
   integrity sha512-bwKX88k2JhCV9D1vtE8+naDKlLiGrSmf8zi/Y9ivFHwbmRfA8RxS/aVJ+sIht2XOwqoNr4xUPUkGZpc1sHFEKg==
 
-lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.21, lodash@^4.17.4, lodash@^4.3.0:
+lodash@^4.16.4, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.21, lodash@^4.17.4, lodash@^4.3.0:
   version "4.17.21"
   resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -9196,10 +9196,10 @@ react-native-blob-util@^0.17.0:
     base-64 "0.1.0"
     glob "^7.2.3"
 
-react-native-calendars@^1.302.0:
-  version "1.1298.0"
-  resolved "https://registry.npmjs.org/react-native-calendars/-/react-native-calendars-1.1298.0.tgz"
-  integrity sha512-+g9b6ceYQn+kEzS2dK5RsOhXR4Ue659EOVTpg+5kFZBHbgwqIqSwpKQIXwK6h8jkDMpUgjMYn4qVLYHW77FzWw==
+react-native-calendars@^1.1304.1:
+  version "1.1304.1"
+  resolved "https://registry.npmjs.org/react-native-calendars/-/react-native-calendars-1.1304.1.tgz"
+  integrity sha512-D1aU5lLhi7KCCCeHhKOkcC41K8s3paiiIfMaOQx6NezCbgKHelqT01WPpAZLh3Cm0QTC5EZo0oDPD0mCdKrDgQ==
   dependencies:
     hoist-non-react-statics "^3.3.1"
     lodash "^4.17.15"
@@ -9553,7 +9553,14 @@ react-native-vega-scroll-list@^1.0.0:
     react "16.11.0"
     react-native "0.62.2"
 
-react-native-video@^5.2.1:
+react-native-video-controls@^2.8.1:
+  version "2.8.1"
+  resolved "https://registry.npmjs.org/react-native-video-controls/-/react-native-video-controls-2.8.1.tgz"
+  integrity sha512-dBmrE3TAKaR1gYMfbukjAM6Xo8OMZyRrxPzZtnaUgWcvGo11PQwzaI/j8HPD5fLgO+rlweP2pDpEJyIBsJvJkw==
+  dependencies:
+    lodash "^4.16.4"
+
+react-native-video@^5.2.1, react-native-video@>=2.0.0:
   version "5.2.1"
   resolved "https://registry.npmjs.org/react-native-video/-/react-native-video-5.2.1.tgz"
   integrity sha512-aJlr9MeTuQ0LpZ4n+EC9RvhoKeiPbLtI2Rxy8u7zo/wzGevbRpWHSBj9xZ5YDBXnAVXzuqyNIkGhdw7bfdIBZw==
@@ -9633,7 +9640,7 @@ react-native-windows@*, react-native-windows@>=0.63.0, react-native-windows@>=0.
     ws "^6.2.2"
     yargs "^17.6.2"
 
-react-native@*, "react-native@^0.0.0-0 || 0.60 - 0.72 || 1000.0.0", react-native@^0.72.3, "react-native@> 0.57", "react-native@>= 0.30.0", "react-native@>= 0.33", react-native@>=0.23.1, react-native@>=0.33, react-native@>=0.35, react-native@>=0.40.0, react-native@>=0.42.0, react-native@>=0.47, react-native@>=0.47.1, react-native@>=0.48.4, react-native@>=0.50.0, react-native@>=0.56, react-native@>=0.57, react-native@>=0.57.0, react-native@>=0.58.4, react-native@>=0.59, react-native@>=0.59.5, react-native@>=0.60, react-native@>=0.60.0, react-native@>=0.60.0-rc.2, react-native@>=0.60.4, react-native@>=0.62.2, react-native@>=0.63.2, react-native@>=0.65.1, react-native@>=0.8.0, react-native@0.68.2:
+react-native@*, "react-native@^0.0.0-0 || 0.60 - 0.72 || 1000.0.0", react-native@^0.72.3, "react-native@> 0.57", "react-native@>= 0.30.0", "react-native@>= 0.33", react-native@>=0.23.1, react-native@>=0.33, react-native@>=0.35, react-native@>=0.40.0, react-native@>=0.42.0, react-native@>=0.46.0, react-native@>=0.47, react-native@>=0.47.1, react-native@>=0.48.4, react-native@>=0.50.0, react-native@>=0.56, react-native@>=0.57, react-native@>=0.57.0, react-native@>=0.58.4, react-native@>=0.59, react-native@>=0.59.5, react-native@>=0.60, react-native@>=0.60.0, react-native@>=0.60.0-rc.2, react-native@>=0.60.4, react-native@>=0.62.2, react-native@>=0.63.2, react-native@>=0.65.1, react-native@>=0.8.0, react-native@0.68.2:
   version "0.68.2"
   resolved "https://registry.npmjs.org/react-native/-/react-native-0.68.2.tgz"
   integrity sha512-qNMz+mdIirCEmlrhapAtAG+SWVx6MAiSfCbFNhfHqiqu1xw1OKXdzIrjaBEPihRC2pcORCoCHduHGQe/Pz9Yuw==

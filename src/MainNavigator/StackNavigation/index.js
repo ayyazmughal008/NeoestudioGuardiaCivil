@@ -47,6 +47,7 @@ import BattleTest from '../../screens/BattleTest';
 import AudioActivity from '../../screens/Actividad/AudioActivity';
 import TestScreen from '../../screens/TestScreen';
 import Settings from '../../screens/Settings';
+import TestTwo from '../../screens/VideoClass/TestTwo';
 
 export default createStackNavigator(
   {
@@ -334,6 +335,12 @@ export default createStackNavigator(
     },
     Settings: {
       screen: Settings,
+      navigationOptions: {
+        gestureEnabled: false,
+      },
+    },
+    TestTwo: {
+      screen: TestTwo,
       navigationOptions: {
         gestureEnabled: false,
       },

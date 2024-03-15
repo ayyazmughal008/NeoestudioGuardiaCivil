@@ -30,9 +30,9 @@ export const data = [
     {
         id: 4,
         text: "Directo",
-        status: false,
+        status: true,
         isChat: false,
-        newItems: true,
+        newItems: false,
         isShow:true,
         image: require('../../Images/directo.png')
     },

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// @ts-expect-error
 import hoistNonReactStatic from 'hoist-non-react-statics';
 import CalendarContext from './Context';
 function asCalendarConsumer(WrappedComponent) {

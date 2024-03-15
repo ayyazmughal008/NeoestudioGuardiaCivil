@@ -19,6 +19,7 @@ import {
   resetAllExams,
   updateUserBaremo,
   getCurrentUser,
+  notificationToggle
 } from '../../Redux/action';
 import {useSelector, useDispatch} from 'react-redux';
 import ToggleSwitch from 'toggle-switch-react-native';
@@ -34,6 +35,7 @@ const Settings = props => {
 
   const login = useSelector(state => state.user.login);
   const AuthLoading = useSelector(state => state.user.AuthLoading);
+  const toggle = useSelector(state => state.user.toggle);
   const text = 'User has been deleted !';
 
   const apiCall = async () => {
@@ -72,6 +74,8 @@ const Settings = props => {
     }
   };
 
+  console.log(toggle);
+
   return (
     <FastImage
       style={styles.root}
@@ -100,7 +104,7 @@ const Settings = props => {
           ]}>
           <Text style={styles.itemTitle}>{'Puntos de baremo'}</Text>
           <Text onPress={() => showBaremo(true)} style={styles.itemTitle}>
-            {login.data.baremo}
+            {login.data.baremo === "." ? 0 : login.data.baremo}
           </Text>
         </View>
         {/* Notification Block */}
@@ -111,13 +115,13 @@ const Settings = props => {
           ]}>
           <Text style={styles.itemTitle}>{'Notificaciones Push'}</Text>
           <ToggleSwitch
-            isOn={isNoti}
+            isOn={toggle}
             onColor="green"
             offColor="red"
             //label="Example label"
             labelStyle={{color: 'black', fontWeight: '900'}}
             size="small"
-            onToggle={isOn => setNoti(isOn)}
+            onToggle={isOn => dispatch(notificationToggle(isOn))}
           />
         </View>
         {/* reset exames */}
@@ -217,7 +221,7 @@ const Settings = props => {
         noClick={() => {
           showBaremo(false);
         }}
-        myText = {"Escribe tu escala y presiona el botón Enviar."}
+        myText = {"Escribe los puntos de\n\baremo y pulsa \"Enviar\". "}
       />
     </FastImage>
   );

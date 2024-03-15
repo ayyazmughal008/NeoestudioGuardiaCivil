@@ -51,8 +51,8 @@ class MainApp extends React.Component {
     });
     messaging().setBackgroundMessageHandler(async remoteMessage => {
       console.log('Message handled in the background!', remoteMessage);
-      if (remoteMessage?.data?.isweb) {
-        Linking.openURL(remoteMessage?.data?.link);
+      if (remoteMessage?.data?.isweb === 'True') {
+        Linking.openURL(remoteMessage?.data?.weburl);
       } else {
         if (remoteMessage?.data?.screen === 'Actividades') {
           {
@@ -93,8 +93,8 @@ class MainApp extends React.Component {
         'Notification caused app to open from background state:',
         remoteMessage,
       );
-      if (remoteMessage?.data?.isweb) {
-        Linking.openURL(remoteMessage?.data?.link);
+      if (remoteMessage?.data?.isweb === 'True') {
+        Linking.openURL(remoteMessage?.data?.weburl);
       } else {
         if (remoteMessage?.data?.screen === 'Actividades') {
           {
@@ -143,8 +143,8 @@ class MainApp extends React.Component {
             'Notification caused app to open from quit state:',
             remoteMessage,
           );
-          if (remoteMessage?.data?.isweb) {
-            Linking.openURL(remoteMessage?.data?.link);
+          if (remoteMessage?.data?.isweb === 'True') {
+            Linking.openURL(remoteMessage?.data?.weburl);
           } else {
             if (remoteMessage?.data?.screen === 'Actividades') {
               {

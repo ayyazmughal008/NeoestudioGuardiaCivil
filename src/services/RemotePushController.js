@@ -25,9 +25,9 @@ const RemotePushController = props => {
       // (required) Called when a remote or local notification is opened or received
       onNotification: function (notification) {
         notification.finish(PushNotificationIOS.FetchResult.NoData);
-        // let naviType = "";
-        // naviType = notification.data.type;
-        // console.log(naviType)
+        let naviType = "";
+         naviType = notification.data;
+         console.log('notification Open',naviType)
       },
       // (optional) Called when Registered Action is pressed and invokeApp is false, if true onNotification will be called (Android)
       onAction: function (notification) {
@@ -68,11 +68,12 @@ const RemotePushController = props => {
       },
       created => console.log(`createChannel returned '${created}'`), // (optional) callback returns whether the channel was created, false means it already existed.
     );
-    const unsubscribe = messaging().onMessage(async remoteMessage => {å
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
       PushNotification.localNotification({
         channelId: 'neoestudio-id',
         message: remoteMessage.notification.body,
         title: remoteMessage.notification.title,
+        image: remoteMessage.notification.image,
         // message: remoteMessage.data.body,
         // title: remoteMessage.data.title,
         bigPictureUrl: remoteMessage?.data?.image,

@@ -6,13 +6,15 @@ export declare class WeekCalendarDriver {
     renderTree: ReturnType<typeof render>;
     constructor(testID: string, element: React.ReactElement);
     render(element?: React.ReactElement<any, string | React.JSXElementConstructor<any>>): ReturnType<typeof render>;
-    getWeekCalendar(): ReactTestInstance;
+    getWeekCalendar(): import("react-test-renderer").ReactTestInstance;
     /** List */
-    getListProps(): any;
+    getListProps(): {
+        [propName: string]: any;
+    };
     getItemTestID(date: string): string;
-    getListItem(date: string): ReactTestInstance;
+    getListItem(date: string): import("react-test-renderer").ReactTestInstance;
     /** Day */
     getDayTestID(date: string): string;
-    getDay(date: string): ReactTestInstance;
+    getDay(date: string): import("react-test-renderer").ReactTestInstance;
     selectDay(date: string): void;
 }

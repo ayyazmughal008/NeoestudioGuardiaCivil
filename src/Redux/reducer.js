@@ -41,6 +41,7 @@ import {
   TOAST,
   BATTLE_QUESTION,
   REJECT_RESON,
+  NOTI_TOGGLE
 } from './action';
 
 const initialUserState = {
@@ -86,6 +87,7 @@ const initialUserState = {
   showToast: false,
   battaleQues: '',
   rejectReason: [],
+  toggle: true
 };
 
 const userReducer = (state = initialUserState, action) => {
@@ -134,6 +136,7 @@ const userReducer = (state = initialUserState, action) => {
       showToast: false,
       battaleQues: '',
       rejectReason: [],
+      toggle: true
     };
   }
 
@@ -399,6 +402,12 @@ const userReducer = (state = initialUserState, action) => {
     return {
       ...state,
       rejectReason: action.payload.rejectReason,
+    };
+  }
+  if (action.type === NOTI_TOGGLE) {
+    return {
+      ...state,
+      toggle: action.payload.toggle,
     };
   }
   return state;

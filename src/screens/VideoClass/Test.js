@@ -1269,6 +1269,7 @@ class VideoPlayer extends Component {
             onSeek={this.events.onSeek}
             style={[styles.player.video, this.styles.videoStyle]}
             source={{uri: url}}
+            ignoreSilentSwitch='ignore'
           />
           {this.renderError()}
           {this.renderLoader()}
